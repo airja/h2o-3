@@ -12,6 +12,7 @@ import hex.genmodel.easy.RowData;
 import hex.genmodel.easy.exception.PredictException;
 import hex.genmodel.easy.prediction.BinomialModelPrediction;
 import hex.genmodel.utils.DistributionFamily;
+import hex.tree.xgboost.util.PredictConfiguration;
 import ml.dmlc.xgboost4j.java.*;
 import ml.dmlc.xgboost4j.java.DMatrix;
 import ml.dmlc.xgboost4j.java.XGBoost;
@@ -61,8 +62,8 @@ public class XGBoostTest extends TestUtil {
   
   @Before
   public void setupMojoJavaScoring() {
-    System.setProperty("sys.ai.h2o.xgboost.scoring.java.enable", confMojoJavaScoring); // mojo scoring
-    System.setProperty("sys.ai.h2o.xgboost.predict.java.enable", confJavaPredict); // in-h2o predict
+    System.setProperty(XGBoostMojoReader.SCORE_JAVA_PROP, confMojoJavaScoring); // mojo scoring
+    System.setProperty(PredictConfiguration.PREDICT_JAVA_PROP, confJavaPredict); // in-h2o predict
 
     assertEquals(Boolean.valueOf(confMojoJavaScoring), XGBoostMojoReader.getJavaScoringConfig()); // check that MOJO scoring config was applied
   }
